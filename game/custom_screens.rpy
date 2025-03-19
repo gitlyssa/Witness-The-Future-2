@@ -1,7 +1,31 @@
+screen inventory_button:
+    hbox:
+        xpos 0 ypos 0.036
+        imagebutton:
+            auto "inventory-icon-%s" at Transform(zoom=0.5)
+            action ToggleScreen("inventory")
+        
+        imagebutton:
+            auto "cases-%s" at Transform(zoom=0.5)
+            action [Hide("inspectItem"), ToggleScreen("case_description")]
+
+screen case_description:
+    image "menu-bg_1" align (0.5, 0.15) at Transform(zoom=0.65)
+    if persistent.case_choice == "Case A":
+        $ item_name = "Case A"
+        $ item_desc = "Case A description"
+        $ case_image = "CaseA_File.png"
+    else:
+        $ item_name = "Case B"
+        $ item_desc = "Case B desciption"
+        $ case_image = "CaseB_File.png"
+    text "{}".format(item_name) size 30 align (0.35, 0.62) color "#000000"
+    text "{}".format(item_desc) size 30 align (0.63, 0.35) color "#000000"
+    image "[case_image]" align (0.3, 0.4) at Transform(zoom=2)
 
 screen reminder:
     hbox:
-        xpos 0.14 ypos 0.615
+        xpos 0.8 ypos 0.615
         imagebutton:
             auto "question_%s" at Transform(zoom=0.3)
             action ToggleVariable("reminder_pressed")
@@ -9,7 +33,7 @@ screen reminder:
     $ reminder_text = responses[-1] if answered_first_question else ai_first_question
     
     showif reminder_pressed:
-        add "reminder pop up" at Transform(xalign=0.5, yalign=0, zoom=0.9)
+        add "reminder pop up" at Transform(xalign=0.5, yalign=0, zoom=0.9, xzoom=0.86)
 
         frame:
             xalign 0.5

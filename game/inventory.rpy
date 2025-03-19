@@ -938,8 +938,8 @@ screen full_inventory:
 # evidence:
 screen inventory:
     zorder 3
-    image "UI/inventory-bg.png" xpos 0.02 ypos 0.09 at half_size
-    image "UI/inventory-slots.png" xpos 0.047 ypos 0.25 at half_size
+    image "UI/inventory2-bg.png" xpos 0.008 ypos 0.09 at Transform(xzoom=0.35, yzoom=0.55)
+    image "UI/inventory-slots.png" xpos 0.0406 ypos 0.2464 at Transform(xzoom=0.5, yzoom=0.52)
     imagebutton idle If(inventory_db_enabled == True, true= "UI/inventory-arrow-down-enabled-idle.png", false= "UI/inventory-arrow-down-disabled.png") hover If(inventory_db_enabled == True, true= "UI/inventory-arrow-down-enabled-hover.png", false= "UI/inventory-arrow-down-disabled.png") action Function(inventoryArrows, button = "down") xpos 0.063 ypos 0.89 at half_size
     imagebutton idle If(inventory_ub_enabled == True, true= "UI/inventory-arrow-up-enabled-idle.png", false= "UI/inventory-arrow-up-disabled.png") hover If(inventory_ub_enabled == True, true= "UI/inventory-arrow-up-enabled-hover.png", false= "UI/inventory-arrow-up-disabled.png") action Function(inventoryArrows, button = "up") xpos 0.063 ypos 0.15 at half_size
     add inventory_SM
@@ -970,7 +970,7 @@ screen inventoryItemMenu(item):
         background "#FFFFFF30"
         xpos int(item.x)
         ypos int(item.y)
-        imagebutton auto "UI/view-inventory-item-%s.png" align (0.5, 0.5) at half_size action [Show("inspectItem", items = [item.type]), Hide("inventoryItemMenu")]
+        imagebutton auto "UI/view-inventory-item-%s.png" align (0.5, 0.5) at half_size action [Hide("case_description"), Show("inspectItem", items = [item.type]), Hide("inventoryItemMenu")]
         #imagebutton auto "UI/use-inventory-item-%s.png" align (1.0, 0.5) at half_size action [Function(startDrag, item = item), Hide("inventoryItemMenu")]
         # imagebutton auto "UI/expand-inventory-item-%s.png" align (2.0, 0.5) at half_size action If(renpy.get_screen("toolboxpop") == None, true= Show("toolboxpop"), false= Hide("toolboxpop")) 
 
@@ -1009,7 +1009,7 @@ screen inspectItem(items):
         xfill True
         yfill True
         action If(len(items) > 1, true = RemoveFromSet(items, items[0]), false= [Hide("inspectItem"), If(len(dialogue) > 0, true= Show("characterSay"), false= NullAction())])
-        image "Items Pop Up/items-pop-up-bg.png" align (0.5, 0.55)
+        image "menu-bg_1" align (0.5, 0.15) at Transform(zoom=0.65)
 
         python:
             item_name = ""
@@ -1031,15 +1031,15 @@ screen inspectItem(items):
             elif item_name == "Footprint":
                 item_desc = "This is a footprint."
 
-        text "{}".format(item_name) size 30 align (0.34, 0.72) color "#000000"
-        text "{}".format(item_desc) size 30 align (0.63, 0.5) color "#000000"
+        text "{}".format(item_name) size 30 align (0.35, 0.62) color "#000000"
+        text "{}".format(item_desc) size 30 align (0.63, 0.35) color "#000000"
 
 
         if items[0] == "lantern":
             $lantern_state = inventory_sprites[inventory_items.index("lantern")].state
             image "Items Pop Up/{}-{}-pop-up.png".format("lantern", lantern_state) align (0.5, 0.5) at half_size
         else:
-            image "Items Pop Up/{}-pop-up.png".format(items[0]) align (0.32, 0.5)
+            image "Items Pop Up/{}-pop-up.png".format(items[0]) align (0.32, 0.3)
 
             
 

@@ -9,7 +9,6 @@ default reminder_pressed = False
 default answered_first_question = False
 default switch_cases = False
 
-
 label start:
     scene bg spec
     # REQUIRED FOR INVENTORY:
@@ -178,10 +177,11 @@ label specialty_exploration:
 
 label tutorial_lex_diff:
     scene bg spec
-    show screen inventory
+    show screen inventory_button
     show nina normal3
     show screen darken_background
-    s "Great choice! On your left, you'll see the evidence. If you want to take a closer look at a particular piece of evidence, click on it."
+    s "Great choice! On the top left corner, you'll see the evidence button. If you want to view all your evidence, click on it!"
+    s "If you want more information about a particular piece of evidence, press on the info button when hovering over one."
     hide screen darken_background
     s "Now, there's just one more thing before you step into court."
     show nina normal2
@@ -200,7 +200,6 @@ label tutorial_lex_diff:
     s "Choose wisely! Your decision will shape the difficulty of your examination."
     show nina thinknote1
     s "Once you've made your selection, the court room awaits! I'll be seeing you after your trial. Good luck!"
-    hide screen inventory
     jump difficulty_selection 
 
 label difficulty_selection:
@@ -209,12 +208,12 @@ label difficulty_selection:
         "Prosecution":
             $ LEX_DIFFICULTY = "prosecution"
             $ unplayed_difficulty = "defense"
-            show screen inventory
+            show screen inventory_button
             jump lex_intro
         "Defense":
             $ LEX_DIFFICULTY = "defense"
             $ unplayed_difficulty = "prosecution"
-            show screen inventory
+            show screen inventory_button
             jump lex_intro
 
     label lex_intro:
@@ -224,11 +223,14 @@ label difficulty_selection:
         l "Hello, my name is Lex Machina. I'll be examining you as an expert witness for this case."
         l "Could you please state your first and last name for the court?"
         hide lawyer
+        hide screen inventory_button
         hide screen inventory
+        hide screen inspectItem
+        hide screen case_description
         call screen nameyourself
 
     label lex_intro2:
-        show screen inventory
+        show screen inventory_button
         show lawyer
         l "Thank you, [player_prefix] [player_lname]." 
         l "Before we start, let me introduce you to the Judge presiding over this case, |judge name|."

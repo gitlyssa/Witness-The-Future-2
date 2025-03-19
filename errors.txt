@@ -2,9 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/script.rpy", line 172: expected 'label_name' not found.
-    jump
-        ^
+File "game/custom_screens.rpy", line 10: is not terminated with a newline. (Check strings and parenthesis.)
+(Perhaps you left out a " at the end of the first line.)
+                action ToggleScreen("case_description"")
 
 Ren'Py Version: Ren'Py 8.2.1.24030407
-Sat Mar 15 21:45:56 2025
+Wed Mar 19 01:16:51 2025
